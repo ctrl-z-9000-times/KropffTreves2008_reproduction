@@ -6,6 +6,8 @@ This is a reproduction study of:
 	The emergence of grid cells: intelligent design or just adaptation? 
 	Emilio Kropff and Alessandro Treves, 2018
 
+Written by David McDougall
+
 ## Introduction:
 Kropff & Treves [1] describe a method of producing grid cells.  It appears to be supported by biology [2].  The gist of it is to make a spatial pooler with two new mechanisms: slowed input and fatigue.  Both alterations modify SP's excitement.  First the excitement is put through a low pass filter, which delays all fluctuations and removes spurious fluctuations.  Then the excitement has a fatigue which catches up to it and turns it off.  The fatigue is also the excitement passed through a low pass filter.  
 * The effect of the slowed input mechanism is to cause grid cells (or SP mini-columns) to learn broad, stable areas of the input.  As the sensory organ moves around the world, the slowed input causes the grid cells to represent contiguous areas of the world by forcing columns to react slower than their sensory input is changing.  
