@@ -4,7 +4,7 @@ Grid cells using NUPIC.
 This is a reproduction study of:
 
 	The emergence of grid cells: intelligent design or just adaptation? 
-	Emilio Kropff and Alessandro Treves, 2018
+	Emilio Kropff and Alessandro Treves, 2008
 
 Written by David McDougall
 
