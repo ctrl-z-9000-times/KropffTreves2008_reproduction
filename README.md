@@ -29,23 +29,27 @@ Compare these results to Kropff & Treves, 2008, Figure 1.
 The model is trained in a 200x200 arena by randomly walking.  The simulated agent moves at a constant speed of 1.4 units per step.  When it reaches one of the arenas boundaries it is turned to face back into the arena.  The model is trained for 1 million steps, which took 64 minutes.
 
 ![Agent's path through arena, 10k steps](Path_10k.png?raw=true "Path, 10k steps")
-Figure 1: Example of random walk.  This figure contains only 10,000 steps, as at 1,000,000 steps the path fills the image to solid black.
+**Figure 1:** Example of random walk.  This figure contains only 10,000 steps, as at 1,000,000 steps the path fills the image to solid black.
+
+---
 
 Each location in the arena is represented by 75 place cells.  There are 2,500 place cells in total, for a sparsity of 3%.  Nupic's coordinate encoder models these input cells.
 ![Place Cell Receptive Fields](Input_Receptive_Fields.png?raw=true "Place Cell Receptive Fields")
-Figure 2: Example place cell receptive fields.  Each plot is for a randomly selected place cell.  The place cell activates when the agent moves into the yellow areas of the arena.
+**Figure 2:** Example place cell receptive fields.  Each plot is for a randomly selected place cell.  The place cell activates when the agent moves into the yellow areas of the arena.
+
+---
 
 The model is tested by examining which locations each grid cell activates at (AKA its receptive field).  The model is reset before measuring each location which removes the effects of movement and fatigue, and learning is disabled while testing.  Figure 3 shows the results of this test performed on an untrained model.  Figure 4 shows the results of this test performed on a trained model.  Figure 5 shows the autocorrelations of figure 4, which should reveil any periodic components in their receptive fields.
 
 ![Untrained Grid Cell Receptive Fields](Grid_Cell_Receptive_Fields_untrained.png?raw=true "Untrained Grid Cell Receptive Fields")
-Figure 3: Untrained grid cell receptive fields.  Each box is a randomly selected grid cell.  Notice that some of these figures are zoomed in.
+**Figure 3:** Untrained grid cell receptive fields.  Each box is a randomly selected grid cell.  Notice that some of these figures are zoomed in.
 Notice that the grid cells do not respond to large contiguous areas of the arena.  There are many isolated (non-contiguous) activations.  The small contiguous area are randomly shaped and have fuzzy, ill-defined borders.  
 
 ![Trained Grid Cell Receptive Fields](Grid_Cell_Receptive_Fields_trained.png?raw=true "Trained Grid Cell Receptive Fields")
-Figure 4: Trained grid cell receptive fields, randomly sampled.  Notice that the grid cells respond to large contiguous areas.  Many of the receptive fields are approximately round, the same size, and have sharp, well defined borders.  
+**Figure 4:** Trained grid cell receptive fields, randomly sampled.  Notice that the grid cells respond to large contiguous areas.  Many of the receptive fields are approximately round, the same size, and have sharp, well defined borders.  
 
 ![Grid Cell Autocorrelations](Grid_Cell_RF_Autocorrelations.png?raw=true "Grid Cell Autocorrelations")
-Figure 5: Autocorrelations for the grid cells shown in figure 4.
+**Figure 5:** Autocorrelations for the grid cells shown in figure 4.
 Several of these figures show a clear hexagonal pattern.  Others show stripes, a pattern which (Kropff and Treves, 2008) predicts as a theoretical sub-optimal solution.  Ideally, the surrounding periodic maxima would be as strong as the central maxima but this has not happened.  
 
 
