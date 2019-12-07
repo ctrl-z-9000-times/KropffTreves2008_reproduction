@@ -1,5 +1,5 @@
-# KropffTreves2008_reproduction
-Grid cells using NUPIC.  
+# Reproduction of Kropff & Treves, 2008
+### Grid cells using NUPIC.  
 
 This is a reproduction study of:
 
@@ -9,15 +9,15 @@ This is a reproduction study of:
 Written by David McDougall
 
 ## Introduction:
-Kropff & Treves [1] describe a method of producing grid cells.  It appears to be supported by biology [2].  The gist of it is to make a spatial pooler [8] with two new mechanisms: slowed input and fatigue.  Both alterations modify SP's excitement.  First the excitement is put through a low pass filter, which delays all fluctuations and removes spurious fluctuations.  Then the excitement has a fatigue which catches up to it and turns it off.  The fatigue is also the excitement passed through a low pass filter.  
-* The effect of the slowed input mechanism is to cause grid cells (or SP mini-columns) to learn broad, stable areas of the input.  As the sensory organ moves around the world, the slowed input causes the grid cells to represent contiguous areas of the world by forcing columns to react slower than their sensory input is changing.  
-* The fatigue mechanism shapes the contiguous areas of the grid cell receptive fields into spheres which are packed into the environment.  As the sensory organ passes through areas of the world, grid cells get tired and fall behind in the competition for a short while.  
+Kropff & Treves [1] describe a method of producing grid cells.  It appears to be supported by biology [2].  The gist of it is to make a spatial pooler [8] with two new mechanisms: stability and fatigue.  The spatial pooler's overlap is stabilized by putting it through a low pass filter, which smooths over input fluctuations and removes spurious input fluctuations.  Each cell also has a fatigue which slowly follows its activity, catches up to it and turns it off.  The fatigue is equal to the overlap passed through a low pass filter.  
+* The effect of the stability mechanism is to cause the cells (or SP mini-columns) to learn large, contiguous areas of the input.  As the sensory organ moves around the world, the stability mechanism causes the cells to represent large & contiguous areas of the world by forcing cells to react slower than their sensory input is changing.  
+* The fatigue mechanism shapes the contiguous areas of the grid cell receptive fields into spheres which are then packed into the environment.  As the sensory organ passes through areas of the world, grid cells get tired and fall behind in the competition for a short while.  
 
 ## Methods:
 Grid cells are implemented as an extension to Nupic [4] as a subclass of the SpatialPooler (SP) class.  The SP is modified in three ways:
-1)	Slowed input and fatigue dynamics are applied to the excitement.
-2)	The excitement is divided by the number of connected synapses to each grid cell.
-3)	Synapses only learn when either side changes its activation.  This filters out duplicate updates on sequential time steps.  This is causes the grid cells to only learn when the agent is moving around, a stationary agents grid cells will not learn.
+1)	Stability and fatigue dynamics are applied to the overlap.
+2)	The overlap is divided by the number of connected synapses to each grid cell.
+3)	Synapses only learn when either the presynaptic or postsynaptic side changes its activity state.  This filters out duplicate updates on sequential time steps.  This is causes the grid cells to only learn when the agent is moving around, a stationary agents grid cells will not learn.
 
 #### Usage:
 $ ./grid_cell_demo.py [--train_time number_of_steps]
@@ -39,7 +39,7 @@ Each location in the arena is represented by 75 place cells.  There are 2,500 pl
 
 ---
 
-The model is tested by examining which locations each grid cell activates at (AKA its receptive field).  The model is reset before measuring each location which removes the effects of movement and fatigue, and learning is disabled while testing.  Figure 3 shows the results of this test performed on an untrained model.  Figure 4 shows the results of this test performed on a trained model.  Figure 5 shows the autocorrelations of figure 4, which should reveil any periodic components in their receptive fields.
+The model is tested by examining which locations each grid cell activates at (AKA its receptive field).  The model is reset before measuring each location which removes the effects of movement, stability, and fatigue.  Learning is disabled while testing.  Figure 3 shows the results of this test performed on an untrained model.  Figure 4 shows the results of this test performed on a trained model.  Figure 5 shows the autocorrelations of figure 4, which should reveil any periodic components in their receptive fields.
 
 ![Untrained Grid Cell Receptive Fields](Grid_Cell_Receptive_Fields_untrained.png?raw=true "Untrained Grid Cell Receptive Fields")
 **Figure 3:** Untrained grid cell receptive fields.  Each box is a randomly selected grid cell.  Notice that some of these figures are zoomed in.
@@ -58,7 +58,7 @@ Increasing the training time and doing parameter optimization would be the next 
 
 Hypothetical recurrent connections between grid cells could help align [5][6] and tessellate the grid.  Collateral connections from many sources of input could aide in grid cell function, such as head direction cells and actions.  
 
-Before I do any of that though, I have a different experiment which I intend to perform.  I will attempt to use the slowed input mechanism to induce stability in the L2/3 spatial pooler [7].
+Before I do any of that though, I have a different experiment which I intend to perform.  I will attempt to use the stability mechanism to induce view-point invariance in the L2/3 spatial pooler [7].
 
 ## Works Cited:
 [1]	The emergence of grid cells: intelligent design or just adaptation? Emilio Kropff and Alessandro Treves, 2018.  DOI 10.1002/hipo.20520
